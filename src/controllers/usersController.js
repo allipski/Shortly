@@ -1,4 +1,5 @@
 import { connection } from "../database/database.js";
+import bcrypt from "bcrypt";
 
 async function postNewUser(req, res) {
   const {
@@ -8,20 +9,20 @@ async function postNewUser(req, res) {
     confirmPassword: confirmPassword,
   } = req.body;
 
-  console.log('deu certo');
+  const passwordHash = bcrypt.hashSync(password, 10);
 
-//   try {
-//     await connection
-//       .query(
-//         `INSERT INTO customers (name, email, cpf, birthday) VALUES($1, $2, $3, $4);`,
-//         [name, phone, cpf, birthday]
-//       )
-//       .then((result) => {
-//         return res.sendStatus(201);
-//       });
-//   } catch (error) {
-//     return res.status(500).send(error.message);
-//   }
+  try {
+    await connection
+      .query(
+        `INSERT INTO users (name, email, password) VALUES($1, $2, $3);`,
+        [name, email, passwordHash]
+      )
+      .then((result) => {
+        return res.sendStatus(201);
+      });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 }
 
 export { postNewUser };

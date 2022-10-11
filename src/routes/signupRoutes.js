@@ -4,6 +4,6 @@ import { postNewUser } from '../controllers/usersController.js';
 
 const signupRouter = express.Router();
 
-signupRouter.post('/categories', signupValidation, postNewUser);
+signupRouter.post('/signup', signupValidation, postNewUser);
 
 export default signupRouter;

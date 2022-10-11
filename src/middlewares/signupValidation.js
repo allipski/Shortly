@@ -11,9 +11,9 @@ async function signupValidation(req, res, next) {
 
     const userSchema = Joi.object({
         name: Joi.string().required().trim().min(1),
-        email: Joi.string().email().required(),
-        password: Joi.string().required(),
-        confirmPassword: Joi.string().valid(password).required()
+        email: Joi.string().email().required().trim().min(1),
+        password: Joi.string().required().trim().min(1),
+        confirmPassword: Joi.string().valid(password).required().trim().min(1)
       });
     
       const validation = userSchema.validate(
