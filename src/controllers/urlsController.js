@@ -42,4 +42,21 @@ async function postUrl(req, res) {
     }
 }
 
-export { postUrl };
+async function getUrl(req, res) {
+  const id = req.params.id;
+
+  const existId = await connection.query(`SELECT * FROM urls WHERE id = $1`, [id]);
+
+  if (existId.rows[0] === undefined) {
+    return res.status(401).send("URL not found.");
+  } else {
+    const response = {
+      id: existId.rows[0].id,
+      shortUrl: existId.rows[0].shortUrl,
+      url: existId.rows[0].url
+    }
+    return res.status(200).send(response);
+  }
+}
+
+export { postUrl, getUrl };
