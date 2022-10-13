@@ -78,10 +78,9 @@ async function openUrl(req, res) {
     const url = existShort.rows[0].url;
 
     await connection.query(
-      `UPDATE urls SET "viewCount"=$1 WHERE "shortUrl"=$2`,
+      `UPDATE urls SET "viewCount"=$1 WHERE "shortUrl"=$2;`,
       [viewCount + 1, shortUrl]
     );
-
     return res.redirect(200, url);
   }
 }

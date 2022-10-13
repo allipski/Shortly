@@ -17,6 +17,15 @@ async function authValidation(req, res, next) {
     return res.status(401).send("Authorization token invalid or not found.");
   }
 
+  const existUser = await connection.query(`SELECT users.id, sessions.token FROM users JOIN sessions ON users.id = sessions."userId" WHERE sessions.token = $1;
+  `, [token]);
+
+  if (existUser.rows[0] === undefined) {
+    return res.status(404).send("User does not exist.");
+  }
+
+  res.locals.user = existUser;
+
   next();
 }
 

@@ -25,4 +25,55 @@ async function postNewUser(req, res) {
   }
 }
 
-export { postNewUser };
+async function getUserInfo (req, res) {
+  const userId = res.locals.user.rows[0].id;
+
+  try {
+    const hasUrls = await connection
+      .query(`SELECT * FROM urls WHERE "userId" = $1;`, [userId]);
+
+    if (hasUrls.rows[0] !== undefined) {
+      await connection
+      .query(
+        `SELECT
+        users.id AS "id",
+        users.name AS "name",
+      
+        SUM("viewCount") as "visitCount",
+        
+        ARRAY(
+            SELECT JSON_BUILD_OBJECT('id', urls.id, 'shortUrl', urls."shortUrl", 'url', urls.url, 'visitCount', urls."viewCount")
+            FROM users JOIN urls ON users.id = urls."userId"
+          )
+        AS "shortenedUrls"
+      
+        FROM urls
+      
+        JOIN users ON urls."userId" = users.id
+      
+        WHERE "userId" = $1
+      
+        GROUP BY users.id;`, [userId])
+      .then((result) => {
+        return res.status(200).send(result.rows[0]);
+      });
+    } else {
+      await connection
+      .query(`SELECT * FROM users WHERE id = $1;`, [userId])
+      .then((result) => {
+        const userData = {
+          id: userId,
+          name: result.rows[0].name,
+          visitCount: 0,
+          shortenedUrls:[]
+        }
+        return res.status(200).send(userData);
+      });
+    }
+  
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
+export { postNewUser,getUserInfo };
