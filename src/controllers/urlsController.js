@@ -7,7 +7,7 @@ async function postUrl(req, res) {
   const token = bearerToken.slice(7);
 
   const getUser = await connection.query(
-    `SELECT "userId" FROM sessions WHERE token = $1`,
+    `SELECT "userId" FROM sessions WHERE token = $1;`,
     [token]
   );
 
@@ -17,14 +17,14 @@ async function postUrl(req, res) {
   let shortUrl = nanoid();
 
   let checkUniqueness = await connection.query(
-    `SELECT "shortUrl" FROM urls WHERE "shortUrl" = $1`,
+    `SELECT "shortUrl" FROM urls WHERE "shortUrl" = $1;`,
     [shortUrl]
   );
 
   while (checkUniqueness.rows[0] !== undefined) {
     shortUrl = nanoid();
     checkUniqueness = await connection.query(
-      `SELECT "shortUrl" FROM urls WHERE shortUrl = $1`,
+      `SELECT "shortUrl" FROM urls WHERE shortUrl = $1;`,
       [shortUrl]
     );
   }
@@ -45,10 +45,10 @@ async function postUrl(req, res) {
 async function getUrl(req, res) {
   const id = req.params.id;
 
-  const existId = await connection.query(`SELECT * FROM urls WHERE id = $1`, [id]);
+  const existId = await connection.query(`SELECT * FROM urls WHERE id = $1;`, [id]);
 
   if (existId.rows[0] === undefined) {
-    return res.status(401).send("URL not found.");
+    return res.status(404).send("URL not found.");
   } else {
     const response = {
       id: existId.rows[0].id,
@@ -59,4 +59,19 @@ async function getUrl(req, res) {
   }
 }
 
-export { postUrl, getUrl };
+async function openUrl(req, res) {
+  const shortUrl = req.params.shortUrl;
+
+  const existShort = await connection.query(`SELECT * FROM urls WHERE "shortUrl" = $1;`, [shortUrl]);
+
+  if (existShort.rows[0] === undefined) {
+    return res.status(404).send("URL not found.");
+  } else {
+    const viewCount = existShort.rows[0].viewCount
+    const url = existShort.rows[0].url
+    await connection.query(`UPDATE urls SET "viewCount"=$1 WHERE "shortUrl"=$2`, [viewCount + 1, shortUrl]);
+    return res.redirect(url);
+  }
+}
+
+export { postUrl, getUrl, openUrl };
