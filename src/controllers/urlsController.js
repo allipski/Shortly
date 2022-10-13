@@ -1,5 +1,6 @@
 import { connection } from "../database/database.js";
 import { customAlphabet } from "nanoid";
+import { stringify } from "uuid";
 
 async function postUrl(req, res) {
   const url = req.body.url;
@@ -28,8 +29,6 @@ async function postUrl(req, res) {
       [shortUrl]
     );
   }
-
-  console.log(shortUrl, url, userId);
 
     try {
       await connection
@@ -70,6 +69,7 @@ async function openUrl(req, res) {
     const viewCount = existShort.rows[0].viewCount
     const url = existShort.rows[0].url
     await connection.query(`UPDATE urls SET "viewCount"=$1 WHERE "shortUrl"=$2`, [viewCount + 1, shortUrl]);
+    console.log(url)
     return res.redirect(url);
   }
 }
