@@ -2,16 +2,10 @@
 -- PostgreSQL database dump
 --
 
-DO
-$$
-BEGIN
-    CREATE ROLE u27iadqvn2a3q5 WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD 'senha_secreta';
-    CREATE ROLE mivuyqbcpdcfcn WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD 'senha_secreta';
-END
-$$;
-
 -- Dumped from database version 14.5 (Ubuntu 14.5-1.pgdg20.04+1)
 -- Dumped by pg_dump version 14.5 (Ubuntu 14.5-0ubuntu0.22.04.1)
+
+-- Started on 2022-10-14 16:02:14 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -25,20 +19,20 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: heroku_ext; Type: SCHEMA; Schema: -; Owner: u27iadqvn2a3q5
+-- TOC entry 4 (class 2615 OID 18326242)
+-- Name: heroku_ext; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA heroku_ext;
 
-
-ALTER SCHEMA heroku_ext OWNER TO u27iadqvn2a3q5;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: sessions; Type: TABLE; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 215 (class 1259 OID 18394660)
+-- Name: sessions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.sessions (
@@ -49,10 +43,9 @@ CREATE TABLE public.sessions (
 );
 
 
-ALTER TABLE public.sessions OWNER TO mivuyqbcpdcfcn;
-
 --
--- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 214 (class 1259 OID 18394659)
+-- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.sessions_id_seq
@@ -64,17 +57,18 @@ CREATE SEQUENCE public.sessions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sessions_id_seq OWNER TO mivuyqbcpdcfcn;
-
 --
--- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4334 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 
 --
--- Name: urls; Type: TABLE; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 213 (class 1259 OID 18394648)
+-- Name: urls; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.urls (
@@ -87,10 +81,9 @@ CREATE TABLE public.urls (
 );
 
 
-ALTER TABLE public.urls OWNER TO mivuyqbcpdcfcn;
-
 --
--- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 212 (class 1259 OID 18394647)
+-- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.urls_id_seq
@@ -102,17 +95,18 @@ CREATE SEQUENCE public.urls_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.urls_id_seq OWNER TO mivuyqbcpdcfcn;
-
 --
--- Name: urls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4335 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: urls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 211 (class 1259 OID 18394636)
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.users (
@@ -124,10 +118,9 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO mivuyqbcpdcfcn;
-
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 210 (class 1259 OID 18394635)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.users_id_seq
@@ -139,38 +132,43 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_id_seq OWNER TO mivuyqbcpdcfcn;
-
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4336 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: sessions id; Type: DEFAULT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4167 (class 2604 OID 18475946)
+-- Name: sessions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.sessions_id_seq'::regclass);
 
 
 --
--- Name: urls id; Type: DEFAULT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4165 (class 2604 OID 18475947)
+-- Name: urls id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4163 (class 2604 OID 18475948)
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4328 (class 0 OID 18394660)
+-- Dependencies: 215
+-- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.sessions (id, "userId", token, "createdAt") FROM stdin;
@@ -184,7 +182,9 @@ COPY public.sessions (id, "userId", token, "createdAt") FROM stdin;
 
 
 --
--- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4326 (class 0 OID 18394648)
+-- Dependencies: 213
+-- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM stdin;
@@ -202,7 +202,9 @@ COPY public.urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM 
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4324 (class 0 OID 18394636)
+-- Dependencies: 211
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.users (id, name, email, password, "createdAt") FROM stdin;
@@ -223,28 +225,35 @@ COPY public.users (id, name, email, password, "createdAt") FROM stdin;
 
 
 --
--- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4337 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.sessions_id_seq', 18, true);
 
 
 --
--- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4338 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.urls_id_seq', 12, true);
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4339 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.users_id_seq', 13, true);
 
 
 --
--- Name: sessions sessions_pk; Type: CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4177 (class 2606 OID 18394668)
+-- Name: sessions sessions_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sessions
@@ -252,7 +261,8 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- Name: sessions sessions_token_key; Type: CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4179 (class 2606 OID 18394672)
+-- Name: sessions sessions_token_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sessions
@@ -260,7 +270,8 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- Name: sessions sessions_userId_key; Type: CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4181 (class 2606 OID 18394670)
+-- Name: sessions sessions_userId_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sessions
@@ -268,7 +279,8 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- Name: urls urls_pk; Type: CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4173 (class 2606 OID 18394656)
+-- Name: urls urls_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.urls
@@ -276,7 +288,8 @@ ALTER TABLE ONLY public.urls
 
 
 --
--- Name: urls urls_shortUrl_key; Type: CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4175 (class 2606 OID 18394658)
+-- Name: urls urls_shortUrl_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.urls
@@ -284,7 +297,8 @@ ALTER TABLE ONLY public.urls
 
 
 --
--- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4169 (class 2606 OID 18394646)
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -292,7 +306,8 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4171 (class 2606 OID 18394644)
+-- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -300,7 +315,8 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: sessions sessions_fk0; Type: FK CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4183 (class 2606 OID 18394678)
+-- Name: sessions sessions_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sessions
@@ -308,36 +324,15 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- Name: urls urls_fk0; Type: FK CONSTRAINT; Schema: public; Owner: mivuyqbcpdcfcn
+-- TOC entry 4182 (class 2606 OID 18394673)
+-- Name: urls urls_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.urls
     ADD CONSTRAINT urls_fk0 FOREIGN KEY ("userId") REFERENCES public.users(id);
 
 
---
--- Name: SCHEMA heroku_ext; Type: ACL; Schema: -; Owner: u27iadqvn2a3q5
---
-
-GRANT USAGE ON SCHEMA heroku_ext TO mivuyqbcpdcfcn;
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: mivuyqbcpdcfcn
---
-
-REVOKE ALL ON SCHEMA public FROM postgres;
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-GRANT ALL ON SCHEMA public TO mivuyqbcpdcfcn;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
---
--- Name: LANGUAGE plpgsql; Type: ACL; Schema: -; Owner: postgres
---
-
-GRANT ALL ON LANGUAGE plpgsql TO mivuyqbcpdcfcn;
-
+-- Completed on 2022-10-14 16:02:24 -03
 
 --
 -- PostgreSQL database dump complete
