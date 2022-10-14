@@ -3,6 +3,11 @@ import Joi from "joi";
 
 async function authValidation(req, res, next) {
   const { authorization: bearerToken } = req.headers;
+  
+  if (bearerToken === undefined) {
+    return res.status(401).send("Authorization token not found.");
+  }
+
   const token = bearerToken.slice(7);
 
   const headerSchema = Joi.object({
@@ -14,7 +19,7 @@ async function authValidation(req, res, next) {
   const existSession = await connection.query(`SELECT * FROM sessions WHERE token = $1`, [token]);
 
   if (existSession.rows[0] === undefined || validation.error) {
-    return res.status(401).send("Authorization token invalid or not found.");
+    return res.status(401).send("Authorization token invalid");
   }
 
   const existUser = await connection.query(`SELECT users.id, sessions.token FROM users JOIN sessions ON users.id = sessions."userId" WHERE sessions.token = $1;

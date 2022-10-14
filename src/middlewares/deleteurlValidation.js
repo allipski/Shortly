@@ -15,6 +15,10 @@ async function deleteurlValidation(req, res, next) {
     [id]
   );
 
+  if (urlOwnership.rows[0] === undefined) {
+    return res.status(404).send("URL does not exist.");
+  }
+
   if (existSession.rows[0].userId !== urlOwnership.rows[0].userId) {
     return res.status(401).send("This URL does not belong to this user. Cannot delete.");
   }
