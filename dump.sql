@@ -2,6 +2,14 @@
 -- PostgreSQL database dump
 --
 
+DO
+$$
+BEGIN
+    CREATE ROLE u27iadqvn2a3q5 WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD 'senha_secreta';
+    CREATE ROLE mivuyqbcpdcfcn WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD 'senha_secreta';
+END
+$$;
+
 -- Dumped from database version 14.5 (Ubuntu 14.5-1.pgdg20.04+1)
 -- Dumped by pg_dump version 14.5 (Ubuntu 14.5-0ubuntu0.22.04.1)
 
