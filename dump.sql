@@ -5,7 +5,7 @@
 -- Dumped from database version 14.5 (Ubuntu 14.5-1.pgdg20.04+1)
 -- Dumped by pg_dump version 14.5 (Ubuntu 14.5-0ubuntu0.22.04.1)
 
--- Started on 2022-10-14 16:02:14 -03
+-- Started on 2022-10-16 18:13:06 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -195,7 +195,6 @@ COPY public.urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM 
 8	dab460773a	https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DC6RUp21s6BQ&psig=AOvVaw2AD1rcywAipF6cWVUhy8Hm&ust=1665779319398000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCIDt2NaF3voCFQAAAAAdAAAAABAE	4	2	2022-10-13 20:32:50.874057
 1	e4b9ddcf23	https://google.com/	2	3	2022-10-13 14:44:33.443874
 9	6ee6ab13d2	https://www.youtube.com/watch?v=C6RUp21s6BQ	4	2	2022-10-13 20:33:34.087585
-11	523b06faa3	httbootcampra.notion.site/Materiais-038b870362b744d88c047f4e4e8beb46	1	0	2022-10-14 15:02:12.364589
 2	f110fb28d4	https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.surrenderat20.net%2F2022%2F09%2F927-pbe-update-tft-highlights-tentative.html&psig=AOvVaw3Bee94bLMvB_36R4A4EiF2&ust=1665767731955000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOj2vcfa3foCFQAAAAAdAAAAABAE	2	5	2022-10-13 17:18:35.011564
 12	9089bc707c	https://google.com.br	1	0	2022-10-14 15:04:52.303743
 \.
@@ -332,7 +331,7 @@ ALTER TABLE ONLY public.urls
     ADD CONSTRAINT urls_fk0 FOREIGN KEY ("userId") REFERENCES public.users(id);
 
 
--- Completed on 2022-10-14 16:02:24 -03
+-- Completed on 2022-10-16 18:13:26 -03
 
 --
 -- PostgreSQL database dump complete
